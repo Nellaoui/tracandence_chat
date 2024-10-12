@@ -1,16 +1,12 @@
-"""
-ASGI config for django_project project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.0/howto/deployment/asgi/
-"""
-
 import os
-
 from django.core.asgi import get_asgi_application
+from channels.routing import ProtocolTypeRouter, URLRouter
+from pages.routing import wsPattern
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')  # Adjust as necessary
 
-application = get_asgi_application()
+http_response_app = get_asgi_application()
+
+application = ProtocolTypeRouter(
+    {"http": http_response_app, "websocket": URLRouter(wsPattern)}
+)
