@@ -122,12 +122,12 @@
       }
 
       .single-message {
-        width: fit-content;
-        max-width: 70%;
-        margin-bottom: 1rem;
+        display: grid;
+        justify-content: flex-start;
       }
 
       .msg-body {
+        border: 1px solid #f0f0f5;
         margin-top: 0.5rem;
         padding: 0.75rem;
         background-color: #4caf50;
@@ -140,17 +140,21 @@
 
       .sent {
         position: relative;
-        right: -25%;
+        justify-content: flex-end;
       }
       .sent > .msg-body {
         background-color: #007bff;
       }
 
       .sender {
-        width: fit-content;
         margin-top: 0.25rem;
         font-size: 0.8rem;
         color: #888;
+        text-align: right; 
+      }
+      
+      .recevied .sender{
+        text-align: left;
       }
 
       .chats-container {
@@ -182,7 +186,7 @@
             <span class="sender">Me</span>
           </div>
           {% else %}
-          <div class="single-message">
+          <div class="single-message received">
             <p class="msg-body">{{ message.message }}</p>
             <span class="sender">{{ message.sender }}</span>
           </div>
@@ -245,7 +249,7 @@
           </div>`;
         }
         else{
-          chats_div.innerHTML += `<div class="single-message">
+          chats_div.innerHTML += `<div class="single-message received">
             <p class="msg-body">${content}</p>
             <span class="sender">${sender}</span>
           </div>`;

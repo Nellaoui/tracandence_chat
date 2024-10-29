@@ -1,9 +1,17 @@
 from django.db import models
 
 class Room(models.Model):
-    room_name = models.CharField(max_length=50)
-    def __str__(self):
-        return self.room_name
+    room_name = models.CharField(max_length=50, unique=True)
+    user1 = models.CharField(max_length=50, default="unknown")
+    user2 = models.CharField(max_length=50, default="unknown")
+
+    def checkSorted(self, *args, **kwargs):
+        if self.user1 > self.user2:
+            self.user1, self.user2 = self.user2, self.user1
+        super().save(*args, **kwargs)
+
+class Meta:
+    unique_together = ('user1', 'user2')
 
 class Message(models.Model):
         room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -13,4 +21,3 @@ class Message(models.Model):
         
         def __str__(self):
             return f"{str(self.room)} - {self.sender}"
-
