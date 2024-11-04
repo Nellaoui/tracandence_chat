@@ -178,7 +178,7 @@
   <body>
     <div class="page-container">
       <div class="content">
-        <h1>Hello {{ user }} {{ room_name }} Chat Room</h1>
+        <h1 id="header1" class ="header1"> Hello {{ user }} {{ room_name }} Chat Room</h1>
         <div class="chats-container" id ="chat-container">
           {% for message in messages %} {% if message.sender.lower == user.lower %}
           <div class="single-message sent">
@@ -188,7 +188,7 @@
           {% else %}
           <div class="single-message received">
             <p class="msg-body">{{ message.message }}</p>
-            <span class="sender">{{ message.sender }}</span>
+            <span class="sender">{{ message.sender }}</span>  
           </div>
           {% endif %}
           {% endfor %}
@@ -202,6 +202,8 @@
     </div>
     <script>
       const socketURL = `ws://${window.location.host}/ws/messages/{{ room_name }}/`;
+
+      console.log("this is the socket", socketURL);
       const socket = new WebSocket(socketURL);
       console.log("Establishing connection to ");
       const message_form = document.getElementById("msg-form");

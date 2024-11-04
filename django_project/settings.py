@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j@)ag!g9q2vn!w79mea(&o37)t=t47hlttmwpm*el)y2sm7ac4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -41,10 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "channels",  
     "pages", # same for the prev
+    'corsheaders',
     #"pages.apps.PagesConfig", # it think it same to the next app install
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5504",
+]
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_project.urls'
+
+ALLOWED_HOSTS = ['*']
 
 TEMPLATES = [
     {
@@ -78,6 +86,12 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+ALLOWED_CORS_ORIGINS = [
+    'http://127.0.0.1:5504'
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 DATABASES = {
     'default': {
@@ -112,6 +126,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 USE_I18N = True
 
