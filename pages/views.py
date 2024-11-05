@@ -54,8 +54,8 @@ def get_room_name(user1, user2):
 def RoomList(request, username):
     print("from RoomList")
 
-    roomName = get_room_name('noaman', username)  # must noaman be changed
-    print("roomName", roomName)
+    roomName = get_room_name('safaa', username)  # must noaman be changed
+    print("rddoomName", username)
     try:
         room = Room.objects.get(room_name=roomName)
         serializer = RoomSerializer(room)
@@ -71,7 +71,6 @@ def RoomList(request, username):
 def MessageList(request, room_name):
     try:
         room = Room.objects.get(room_name=room_name)
-        print(f"Room found: {room}")
         try:
             messages = Message.objects.filter(room=room)
             serializer = MessageSerializer(messages, many=True)
